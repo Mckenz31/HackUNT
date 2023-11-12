@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:hacktinder/widgets/onboarding.dart";
 import "package:hacktinder/widgets/swipe.dart";
 
 var kColorScheme = ColorScheme.fromSeed(
@@ -18,12 +19,13 @@ void main() {
       theme:
           ThemeData().copyWith(useMaterial3: true, colorScheme: kColorScheme),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Tech Buddy'),
-        ),
-        body: const Swipe(),
-      ),
+      home: const OnBoarding(),
+      // home: Scaffold(
+      //   appBar: AppBar(
+      //     title: const Text('Tech Buddy'),
+      //   ),
+      //   body: OnBoarding,
+      // ),
     ),
   );
 }
