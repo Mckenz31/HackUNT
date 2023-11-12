@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacktinder/widgets/profile_creation.dart';
+import 'package:hacktinder/widgets/sideDrawer.dart';
 import 'package:hacktinder/widgets/swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hacktinder/data/user.dart';
 import 'package:hacktinder/widgets/chat.dart';
+import 'package:hacktinder/widgets/sideDrawer.dart';
 import 'package:hacktinder/widgets/user_details.dart';
 
 class Swipe extends StatefulWidget {
@@ -54,6 +55,7 @@ class _SwipeState extends State<Swipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const SideDrawer(),
       appBar: AppBar(
         title: const Text('Tech Buddy'),
         actions: [
@@ -142,7 +144,7 @@ class _SwipeState extends State<Swipe> {
                         onPressed: () {
                           showModalBottomSheet(
                             context: context,
-                            builder: ((ctx) => UserDetails(userData: userValues[userIndex],)),
+                            builder: ((ctx) => UserDetails(userData: userValues[userIndex],index: userIndex+1,)),
                           );
                         },
                         child: const Icon(

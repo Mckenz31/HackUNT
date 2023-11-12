@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hacktinder/data/user.dart';
 
 class UserDetails extends StatelessWidget {
-  const UserDetails({super.key, required this.userData});
+  const UserDetails({super.key, required this.userData, required this.index});
 
   final AppUser userData;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class UserDetails extends StatelessWidget {
           Center(
             child: ClipOval(
               child: Image.asset(
-                'assets/images/img1.jpg', // Replace with your image URL
+                'assets/images/img$index.jpg', // Replace with your image URL
                 width: 100.0, // Adjust the size as needed
                 height: 100.0,
                 fit: BoxFit.cover,
