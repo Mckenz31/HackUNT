@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "232096831360",
+    "project_id": "hackunt-42636",
+    "storage_bucket": "hackunt-42636.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232096831360:android:8e002f0e0371c346cbd365",
+        "android_client_info": {
+          "package_name": "com.example.hacktinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-vP79nZSX14Uv8llApIlAqBb3tq3-SEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232096831360:android:2e1f756e00b014b3cbd365",
+        "android_client_info": {
+          "package_name": "com.mckenzie.hacktinder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-vP79nZSX14Uv8llApIlAqBb3tq3-SEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

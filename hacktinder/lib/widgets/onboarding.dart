@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hacktinder/widgets/swipe.dart';
+import 'package:hacktinder/widgets/login.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -68,7 +68,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         if(_pageIndex == 2){
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const Swipe(),
+                              builder: (context) => const Login(),
                             ),
                           );
                         }
