@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hacktinder/data/user.dart';
+import 'package:hacktinder/widgets/chat.dart';
 import 'package:hacktinder/widgets/user_details.dart';
 
 class Swipe extends StatefulWidget {
@@ -48,22 +49,6 @@ class _SwipeState extends State<Swipe> {
     } catch (e) {
       return [];
     }
-    // for (var user in users.docs) {
-    //   print(user.data()['name']);
-    //   userValues.add(
-    //     AppUser(
-    //         email: user.data()['email'],
-    //         name: user.data()['name'],
-    //         age: user.data()['age'],
-    //         major: user.data()['major'],
-    //         labels: user.data()['labels'],
-    //         skills: user.data()['skills'],
-    //         collegeYear: user.data()['collegeYear'],
-    //         university: user.data()['university'],
-    //         description: user.data()['description'],
-    //         expectation: user.data()['expectation']),
-    //   );
-    // }
   }
 
   @override
@@ -71,20 +56,28 @@ class _SwipeState extends State<Swipe> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tech Buddy'),
+        actions: [
+            IconButton(
+              icon: const Icon(Icons.chat_rounded), // Replace with your desired icon
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Chat()),);
+              },
+            ),
+          ],
       ),
       body: FutureBuilder<List<AppUser>>(
         future: userValuesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text('Error loading users'),
             );
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No users available'),
             );
           }
@@ -92,7 +85,7 @@ class _SwipeState extends State<Swipe> {
           final userValues = snapshot.data!;
 
           return Container(
-            margin: EdgeInsets.all(15),
+            margin: const EdgeInsets.all(15),
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
             decoration: BoxDecoration(
@@ -182,22 +175,3 @@ class _SwipeState extends State<Swipe> {
     );
   }
 }
-
-
-
-  // final temp_data = [
-  //   User(
-  //       id: 1,
-  //       name: "Shane Watzon",
-  //       image: "img1",
-  //       major: "Computer Science",
-  //       studentType: Category.junior,
-  //       skillset: ["Flutter, React, Django"]),
-  //   User(
-  //       id: 2,
-  //       name: "Bruce Rilan",
-  //       image: "img2",
-  //       major: "Information Systems",
-  //       studentType: Category.senior,
-  //       skillset: ["C, C++, Node.js, Firebase"])
-  // ];

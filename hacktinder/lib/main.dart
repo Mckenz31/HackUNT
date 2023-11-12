@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:hacktinder/widgets/chat.dart";
+import "package:hacktinder/widgets/login.dart";
 import "package:hacktinder/widgets/onboarding.dart";
 import "package:hacktinder/widgets/profile_creation.dart";
 import "package:hacktinder/widgets/swipe.dart";
@@ -25,7 +27,7 @@ Future<void> main() async {
       theme:
           ThemeData().copyWith(useMaterial3: true, colorScheme: kColorScheme),
       debugShowCheckedModeBanner: false,
-      home: Swipe(),
+      home: const Login(),
     ),
   );
 }
