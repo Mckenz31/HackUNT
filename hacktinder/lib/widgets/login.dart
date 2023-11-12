@@ -80,7 +80,7 @@ class _Login extends State<Login> {
                 onPressed: () async{
                   final user = await _auth.signInWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
                   if(user!=null){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileCreation()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Swipe()));
                   }
                 },
                 child: const Text('Login'),
@@ -96,7 +96,7 @@ class _Login extends State<Login> {
                       );
                       if(newUser != null){
                         Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Swipe(),
+                              builder: (context) => ProfileCreation(),
                             ),);
                       }
                     }

@@ -102,7 +102,7 @@ class _ChatState extends State<Chat> {
           children: <Widget>[
             // TextStream(firestore: _firestore),
             StreamBuilder<QuerySnapshot>(
-              stream: _firestore.collection("messages").snapshots(),
+              stream: _firestore.collection("messages").orderBy('timestamp').snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<Messages> messageWidgets = [];
@@ -114,7 +114,6 @@ class _ChatState extends State<Chat> {
                   });
                   return Expanded(
                     child: ListView(
-                      reverse: true,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 10.0),
                       children: messageWidgets,
