@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacktinder/widgets/profile_creation.dart';
 import 'package:hacktinder/widgets/swipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,17 +19,17 @@ class _Login extends State<Login> {
 
   String _errorMessage = '';
 
-  void _login() {
-    if (_usernameController.text.isNotEmpty) {
-      final newUser = _auth.createUserWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
-      // FirebaseAuth.instance.signInWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
-      _navigateToHome(_usernameController.text);
-    } else {
-      setState(() {
-        _errorMessage = 'Invalid username or password';
-      });
-    }
-  }
+  // void _login() {
+  //   if (_usernameController.text.isNotEmpty) {
+  //     final newUser = _auth.createUserWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
+  //     // FirebaseAuth.instance.signInWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
+  //     _navigateToHome(_usernameController.text);
+  //   } else {
+  //     setState(() {
+  //       _errorMessage = 'Invalid username or password';
+  //     });
+  //   }
+  // }
 
   // void _signup() {
   //   if (_usernameController.text.isNotEmpty) {
@@ -79,8 +80,7 @@ class _Login extends State<Login> {
                 onPressed: () async{
                   final user = await _auth.signInWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
                   if(user!=null){
-                    print(user);
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Swipe()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfileCreation()));
                   }
                 },
                 child: const Text('Login'),
