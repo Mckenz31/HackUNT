@@ -11,7 +11,8 @@ class AppUser {
       required this.collegeYear, 
       required this.university, 
       required this.description, 
-      required this.expectation
+      required this.expectation,
+      required this.image
   });
 
   final String email;
@@ -24,6 +25,7 @@ class AppUser {
   final String university;
   final String description;
   final String expectation;
+  final String image;
 
   String get formattedDate {
     return name;

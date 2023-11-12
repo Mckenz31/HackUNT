@@ -90,7 +90,7 @@ class _ProfileCreationState extends State<ProfileCreation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Match Buddy"),
+        title: const Text("Acada Matchy"),
       ),
       body: SingleChildScrollView(
         child: Padding(

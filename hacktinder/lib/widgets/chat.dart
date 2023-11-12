@@ -93,7 +93,7 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hack Buddy"),
+        title: const Text("Acada Matchy"),
       ),
       body: SafeArea(
         child: Column(

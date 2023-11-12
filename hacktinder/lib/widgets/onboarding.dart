@@ -120,7 +120,7 @@ final List<OnBoard> demo_data = [
   OnBoard(
     image: "assets/images/onboard1.jpg",
     title: "Tired of finding partners?",
-    description: "You can find colleagues that share that have similar events, and pair up for group work, hackathons, study buddy, or any other academic interest.",
+    description: "You can find colleagues that have similar interests, and pair up to work on group projects, hackathons, or maybe even have a study buddy.",
   ),
   OnBoard(
     image: "assets/images/onboard2.jpg",

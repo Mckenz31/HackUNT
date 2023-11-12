@@ -17,7 +17,7 @@ class UserDetails extends StatelessWidget {
           Center(
             child: ClipOval(
               child: Image.asset(
-                'assets/images/img$index.jpg', // Replace with your image URL
+                'assets/images/${userData.image}.jpg', // Replace with your image URL
                 width: 100.0, // Adjust the size as needed
                 height: 100.0,
                 fit: BoxFit.cover,

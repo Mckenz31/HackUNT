@@ -44,6 +44,7 @@ class _SwipeState extends State<Swipe> {
           university: user.data()['university'],
           description: user.data()['description'],
           expectation: user.data()['expectation'],
+          image: user.data()['image']
         );
       }).toList();
       return usersList;
@@ -57,7 +58,7 @@ class _SwipeState extends State<Swipe> {
     return Scaffold(
       drawer: const SideDrawer(),
       appBar: AppBar(
-        title: const Text('Tech Buddy'),
+        title: const Text('Acada Matchy'),
         actions: [
             IconButton(
               icon: const Icon(Icons.chat_rounded), // Replace with your desired icon
@@ -93,7 +94,7 @@ class _SwipeState extends State<Swipe> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               image: DecorationImage(
-                image: AssetImage('assets/images/img${userIndex + 1}.jpg'),
+                image: AssetImage('assets/images/${userValues[userIndex].image}.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

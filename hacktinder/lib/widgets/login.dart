@@ -55,7 +55,7 @@ class _Login extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login/Signup Page'),
+        title: const Text('Acada Matchy'),
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -78,33 +78,34 @@ class _Login extends State<Login> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () async{
-                  final user = await _auth.signInWithEmailAndPassword(email: _usernameController.text, password: _passwordController.text);
-                  if(user!=null){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Swipe()));
+                onPressed: () async {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: _usernameController.text,
+                      password: _passwordController.text);
+                  if (user != null) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => Swipe()));
                   }
                 },
                 child: const Text('Login'),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () async{
+                onPressed: () async {
                   if (_usernameController.text.isNotEmpty) {
-                    try{
-                      final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: _usernameController.text,
-                        password: _passwordController.text
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: _usernameController.text,
+                              password: _passwordController.text);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfileCreation(),
+                        ),
                       );
-                      if(newUser != null){
-                        Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ProfileCreation(),
-                            ),);
-                      }
-                    }
-                    catch (e){
+                    } catch (e) {
                       //
                     }
-                    _navigateToHome(_usernameController.text);
                   } else {
                     setState(() {
                       _errorMessage = 'Invalid username or password';
