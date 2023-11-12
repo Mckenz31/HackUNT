@@ -25,13 +25,7 @@ Future<void> main() async {
       theme:
           ThemeData().copyWith(useMaterial3: true, colorScheme: kColorScheme),
       debugShowCheckedModeBanner: false,
-      home: ProfileCreation(),
-      // home: Scaffold(
-      //   appBar: AppBar(
-      //     title: const Text('Tech Buddy'),
-      //   ),
-      //   body: OnBoarding,
-      // ),
+      home: Swipe(),
     ),
   );
 }

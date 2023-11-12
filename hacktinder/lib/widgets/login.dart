@@ -101,7 +101,7 @@ class _Login extends State<Login> {
                       }
                     }
                     catch (e){
-                      print(e);
+                      //
                     }
                     _navigateToHome(_usernameController.text);
                   } else {

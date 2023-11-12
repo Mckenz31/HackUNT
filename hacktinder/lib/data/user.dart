@@ -1,19 +1,31 @@
-enum Category {freshman, softmore, junior, senior, graduate, phd}
+enum Category { freshman, softmore, junior, senior, graduate, phd }
 
-class User{
+class AppUser {
+  AppUser(
+      {required this.email,
+      required this.name,
+      required this.major,
+      required this.age,
+      required this.labels,
+      required this.skills,
+      required this.collegeYear, 
+      required this.university, 
+      required this.description, 
+      required this.expectation
+  });
 
-  User({required this.id, required this.name, required this.image, required this.major, required this.studentType, required this.skillset});
-
-
-  final int id;
+  final String email;
   final String name;
   final String major;
-  final String image;
-  final Category studentType;
-  final List<String> skillset;
+  final String age;
+  final String labels;
+  final String skills;
+  final String collegeYear;
+  final String university;
+  final String description;
+  final String expectation;
 
-  String get formattedDate{
+  String get formattedDate {
     return name;
   }
-
 }

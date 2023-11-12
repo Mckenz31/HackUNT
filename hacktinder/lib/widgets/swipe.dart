@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hacktinder/data/user.dart';
 
@@ -12,22 +14,56 @@ class Swipe extends StatefulWidget {
 
 class _SwipeState extends State<Swipe> {
   var userIndex = 0;
-  final temp_data = [
-    User(
-        id: 1,
-        name: "Shane Watzon",
-        image: "img1",
-        major: "Computer Science",
-        studentType: Category.junior,
-        skillset: ["Flutter, React, Django"]),
-    User(
-        id: 2,
-        name: "Bruce Rilan",
-        image: "img2",
-        major: "Information Systems",
-        studentType: Category.senior,
-        skillset: ["C, C++, Node.js, Firebase"])
-  ];
+  final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  final userValues = [];
+  Future<List<AppUser>>? userValuesFuture;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    userValuesFuture = getUsers();
+  }
+
+  Future<List<AppUser>> getUsers() async {
+    try {
+      final users = await _firestore.collection("Users").get();
+      final List<AppUser> usersList = users.docs.map((user) {
+        return AppUser(
+          email: user.data()['email'],
+          name: user.data()['name'],
+          age: user.data()['age'],
+          major: user.data()['major'],
+          labels: user.data()['labels'],
+          skills: user.data()['skills'],
+          collegeYear: user.data()['collegeYear'],
+          university: user.data()['university'],
+          description: user.data()['description'],
+          expectation: user.data()['expectation'],
+        );
+      }).toList();
+      return usersList;
+    } catch (e) {
+      return [];
+    }
+    // for (var user in users.docs) {
+    //   print(user.data()['name']);
+    //   userValues.add(
+    //     AppUser(
+    //         email: user.data()['email'],
+    //         name: user.data()['name'],
+    //         age: user.data()['age'],
+    //         major: user.data()['major'],
+    //         labels: user.data()['labels'],
+    //         skills: user.data()['skills'],
+    //         collegeYear: user.data()['collegeYear'],
+    //         university: user.data()['university'],
+    //         description: user.data()['description'],
+    //         expectation: user.data()['expectation']),
+    //   );
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,77 +71,116 @@ class _SwipeState extends State<Swipe> {
       appBar: AppBar(
         title: const Text('Tech Buddy'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(15),
-        height: MediaQuery.sizeOf(context).height,
-        width: MediaQuery.sizeOf(context).width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          image: DecorationImage(
-            image: AssetImage(
-                'assets/images/${temp_data[userIndex].image}.jpg'), // replace with your image path
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Name: ${temp_data[userIndex].name}",
-                style: const TextStyle(color: Colors.white, fontSize: 25),
+      body: FutureBuilder<List<AppUser>>(
+        future: userValuesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error loading users'),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text('No users available'),
+            );
+          }
+
+          final userValues = snapshot.data!;
+
+          return Container(
+            margin: EdgeInsets.all(15),
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              image: DecorationImage(
+                image: AssetImage('assets/images/img${userIndex+1}.jpg'),
+                fit: BoxFit.cover,
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Major : ${temp_data[userIndex].major} | ${temp_data[0].studentType.name}",
-                style: const TextStyle(color: Colors.white, fontSize: 15),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                "Skillset : ${temp_data[userIndex].skillset.join(', ')}",
-                style: const TextStyle(color: Colors.white, fontSize: 15),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          userIndex++;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      )),
-                  const SizedBox(
-                    width: 20,
+                  Text(
+                    "Name: ${userValues[userIndex].name}",
+                    style: const TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          userIndex++;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ))
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Major : ${userValues[userIndex].major} | ${userValues[userIndex].collegeYear}",
+                    style: const TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Skillset : ${userValues[userIndex].skills}",
+                    style: const TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              userIndex++;
+                            });
+                          },
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          )),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              userIndex++;
+                            });
+                          },
+                          child: const Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ))
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 }
+
+
+
+  // final temp_data = [
+  //   User(
+  //       id: 1,
+  //       name: "Shane Watzon",
+  //       image: "img1",
+  //       major: "Computer Science",
+  //       studentType: Category.junior,
+  //       skillset: ["Flutter, React, Django"]),
+  //   User(
+  //       id: 2,
+  //       name: "Bruce Rilan",
+  //       image: "img2",
+  //       major: "Information Systems",
+  //       studentType: Category.senior,
+  //       skillset: ["C, C++, Node.js, Firebase"])
+  // ];

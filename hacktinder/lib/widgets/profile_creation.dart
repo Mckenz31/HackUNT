@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:hacktinder/widgets/swipe.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum CollegeYear { freshman, sophomore, junior, senior, graduate }
@@ -73,7 +74,7 @@ class _ProfileCreationState extends State<ProfileCreation> {
     _firestore.collection("Users").add({
       'email': loggedInUser.email,
       'name': name.text,
-      'age': doubleAmount,
+      'age': age.text,
       'university': university.text, 
       'major': major.text,
       'collegeYear': collegeYear.name,
@@ -82,7 +83,7 @@ class _ProfileCreationState extends State<ProfileCreation> {
       'description': description.text, 
       'expectation': expectation.text
     });    
-    Navigator.pop(context);
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Swipe()));
   }
 
   @override
