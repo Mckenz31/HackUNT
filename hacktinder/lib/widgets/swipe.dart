@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hacktinder/data/user.dart';
+import 'package:hacktinder/widgets/user_details.dart';
 
 class Swipe extends StatefulWidget {
   const Swipe({super.key});
@@ -97,7 +98,7 @@ class _SwipeState extends State<Swipe> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               image: DecorationImage(
-                image: AssetImage('assets/images/img${userIndex+1}.jpg'),
+                image: AssetImage('assets/images/img${userIndex + 1}.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -122,7 +123,7 @@ class _SwipeState extends State<Swipe> {
                     height: 5,
                   ),
                   Text(
-                    "Skillset : ${userValues[userIndex].skills}",
+                    "Domain : ${userValues[userIndex].labels}",
                     style: const TextStyle(color: Colors.white, fontSize: 15),
                   ),
                   const SizedBox(
@@ -145,15 +146,31 @@ class _SwipeState extends State<Swipe> {
                         width: 20,
                       ),
                       ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              userIndex++;
-                            });
-                          },
-                          child: const Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ))
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: ((ctx) => UserDetails(userData: userValues[userIndex],)),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.list,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            userIndex++;
+                          });
+                        },
+                        child: const Icon(
+                          Icons.check,
+                          color: Colors.green,
+                        ),
+                      ),
                     ],
                   ),
                 ],
